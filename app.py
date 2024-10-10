@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, flash, redirect, url_for
 import yt_dlp
 import tempfile
 import os
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 
 @app.route('/')
 def index():
@@ -42,20 +43,26 @@ def download_video():
             'progress_hooks': [progress_hook],
         }
 
-    # Download video/audio
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info_dict = ydl.extract_info(video_url, download=True)
-        file_name = ydl.prepare_filename(info_dict)
+    try:
+        # Download video/audio
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(video_url, download=True)
+            file_name = ydl.prepare_filename(info_dict)
 
-    # Adjust the file extension in case of audio-only download
-    if download_format == 'audioonly':
-        file_name = file_name.replace('.webm', '.mp3')
+        # Adjust the file extension in case of audio-only download
+        if download_format == 'audioonly':
+            file_name = file_name.replace('.webm', '.mp3')
 
-    # Full path of the downloaded file in the temp directory
-    file_path = os.path.join(temp_dir, file_name)
+        # Full path of the downloaded file in the temp directory
+        file_path = os.path.join(temp_dir, file_name)
 
-    # Serve the file to the user
-    return send_file(file_path, as_attachment=True)
+        # Serve the file to the user
+        return send_file(file_path, as_attachment=True)
+
+    except yt_dlp.utils.DownloadError as e:
+        # If there's an issue downloading the video, like needing CAPTCHA or sign-in
+        flash("Unable to download the video. It may require you to sign in or confirm you're not a bot.")
+        return redirect(url_for('index'))
 
 def progress_hook(d):
     if d['status'] == 'downloading':
