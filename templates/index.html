@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SamHuB</title>
+    <style>
+        /* Overall body styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('/static/images/back2.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Centered container */
+        .container {
+            background-color: rgba(200, 200, 200, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 10px 10px 30px black;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Heading style */
+        h1 {
+            color: #007BFF;
+            font-size: 40px;
+            margin-bottom: 15px;
+            padding-bottom: 30px;
+        }
+
+        h2 {
+            color: #007BFF;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+        h3{
+            font-family: 'Poppins', sans-serif;
+            border-bottom:solid 2px black;
+            font-weight:bold;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, select:focus {
+            border-color: #007BFF;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Progress box styling */
+        #progress {
+            display: none;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        #progressText {
+            font-family: 'Courier New', Courier, monospace;
+            color: #555;
+        }
+
+        #developer {
+            font-size: 20px;
+            font-weight: bold;
+            border-bottom: 2px solid black;
+            margin-top: 20px;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            button {
+                font-size: 14px;
+            }
+        }
+    </style>
+    <script>
+        async function handleDownload(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            const downloadButton = document.querySelector("button");
+            downloadButton.innerHTML = "Download started...";
+            downloadButton.disabled = true;
+
+            const formData = new FormData(event.target);
+            const url = event.target.action; // Form action URL
+
+            try {
+                // Send the POST request via fetch API
+                const response = await fetch(url, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    // Create a download link for the user
+                    const blob = await response.blob();
+                    const downloadLink = document.createElement("a");
+                    downloadLink.href = URL.createObjectURL(blob);
+                    downloadLink.download = "downloaded_media"; // You can set a dynamic filename
+                    downloadLink.click();
+
+                    // Reset the button after download completes
+                    downloadButton.innerHTML = "Download";
+                    downloadButton.disabled = false;
+                } else {
+                    alert("Failed to download the media.");
+                    downloadButton.innerHTML = "Download";
+                    downloadButton.disabled = false;
+                }
+            } catch (error) {
+                console.error("Error during download:", error);
+                alert("An error occurred. Please try again.");
+                downloadButton.innerHTML = "Download";
+                downloadButton.disabled = false;
+            }
+        }
+
+        window.onload = function() {
+            const downloadForm = document.querySelector("form");
+            downloadForm.addEventListener("submit", handleDownload);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <img src="/static/images/SamLOGO1.png" alt="Sam Logo" width="230px" height="135px">
+        </h1>
+        <h2>YouTube Media Downloader</h2>
+        <form action="/download" method="POST">
+            <input type="text" name="url" placeholder="Enter YouTube URL" required>
+            <select name="format" required>
+                <option value="bestvideo">Best Video</option>
+                <option value="worstvideo">Worst Video</option>
+                <option value="audioonly">Audio Only</option>
+            </select>
+            <button type="submit">Download</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <h3>Presented By: Sam Kankrale</h3>
+    </div>
+</body>
+</html>
