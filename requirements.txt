@@ -2,4 +2,4 @@
 yt-dlp==2024.9.27
 gunicorn
 gevent>=1.4
-
+waitress=3.0.0
