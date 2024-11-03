@@ -62,6 +62,9 @@ def cleanup():
     except Exception as e:
         flash(f"Cleanup failed: {str(e)}")
     return redirect(url_for('index'))
+@app.route('/about')
+def aboutus():
+    return render_template('about.html')
 
 if __name__ == '__main__':
     if not os.path.exists('downloads'):
