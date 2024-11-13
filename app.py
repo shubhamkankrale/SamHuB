@@ -65,6 +65,12 @@ def cleanup():
 @app.route('/about')
 def aboutus():
     return render_template('about.html')
+@app.route('/instagram')
+def insta():
+    return render_template('instagram.html')
+@app.route('/howtouse')
+def howtouse():
+    return render_template('howtouse.html')
 
 if __name__ == '__main__':
     if not os.path.exists('downloads'):
