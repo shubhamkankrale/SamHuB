@@ -129,7 +129,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        @media (max-width: 455px) {
+        @media (max-width: 400px) {
             .container {
                 padding: 20px;
             }
@@ -160,7 +160,6 @@
             color: white;
             background-color: dodgerblue;
             text-decoration: none;
-            font-weight: bold;
             font-size: 18px;
             padding: 8px 16px;
             border-radius: 5px;
@@ -168,8 +167,16 @@
         }
 
         .navbar a:hover {
-            background-color: dodgerblue;
+            background-color: white;
             color: black;
+        }
+        #tab{
+            position:relative;
+            right:20px;
+        }
+        #insta{
+            position:relative;
+            right:10px;
         }
     </style>
     <script>
@@ -226,7 +233,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="https://samhub.onrender.com/about" id="tab">About us</a>
+        <a href="http://127.0.0.1:5000/about" id="tab" class="btn">About us</a>
+        <a href="http://127.0.0.1:5000/instagram" id="insta" class="btn">Instagram Downloader</a>
+        <a href="http://127.0.0.1:5000/howtouse" id="htu" class="btn">How to use</a>
     </nav>
 
     <div class="container">
