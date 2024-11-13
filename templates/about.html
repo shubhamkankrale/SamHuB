@@ -9,12 +9,14 @@
         .navbar {
             background-color: skyblue;
             height: 50px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: flex-end;
             padding: 0 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            flex-wrap: wrap;
         }
 
         /* Navbar link styling */
@@ -27,6 +29,7 @@
             padding: 8px 16px;
             border-radius: 5px;
             transition: background-color 0.3s;
+            margin: 4px;
         }
 
         .navbar a:hover {
@@ -50,6 +53,7 @@
             color: #333;
             text-align: center;
             margin-bottom: 20px;
+            border-bottom: solid 2px black;
         }
 
         /* Paragraph styling */
@@ -70,14 +74,59 @@
         .container a:hover {
             text-decoration: underline;
         }
-        h1{
-            border-bottom:solid 2px black;
+
+        /* Responsive styling */
+        @media (max-width: 768px) {
+            .navbar {
+                justify-content: center;
+                padding: 0 10px;
+            }
+
+            .navbar a {
+                font-size: 16px;
+                padding: 6px 12px;
+            }
+
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .container p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .navbar a {
+                font-size: 14px;
+                padding: 5px 10px;
+                width: 100%;
+                text-align: center;
+                margin: 2px 0;
+            }
+
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            .container p {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <nav class="navbar">
-        <a href="https://samhub.onrender.com/" id="tab">Home</a>
+        <a href="http://127.0.0.1:5000" id="home" class="btn">Home</a>
+        <a href="http://127.0.0.1:5000/howtouse" id="aboutus" class="btn">How to use</a>
+        <a href="http://127.0.0.1:5000/instagram" id="insta" class="btn">Instagram Downloader</a>
     </nav>
     <div class="container">
         <h1>About SamHuB</h1>
