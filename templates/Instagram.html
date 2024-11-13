@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram - SamHub</title>
+    <style>
+        /* Resetting margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: skyblue;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            border-radius: 8px;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .btn {
+            color: white;
+            background-color: dodgerblue;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .btn:hover {
+            color: black;
+            background-color: white;
+        }
+
+        /* Main container styling */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Responsive styling */
+        @media (max-width: 400px) {
+            .navbar {
+                flex-direction: column;
+                height: auto;
+                padding: 10px;
+            }
+            .btn {
+                font-size: 14px;
+                padding: 6px 12px;
+                margin-bottom: 8px;
+                margin-right: 0;
+            }
+            .container {
+                padding: 15px;
+                margin: 10px;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="http://127.0.0.1:5000/" id="home" class="btn">Home</a>
+        <a href="http://127.0.0.1:5000/about" id="about" class="btn">About Us</a>
+        <a href="http://127.0.0.1:5000/howtouse" id="htu" class="btn">How To Use</a>
+
+    </nav>
+    <div class="container">
+        <h1>Coming Soon!</h1>
+        <p>Instagram Story Saver, Post, Reels Downloader is Coming Soon</p>
+    </div>
+</body>
+</html>
