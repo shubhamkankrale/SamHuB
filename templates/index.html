@@ -50,6 +50,7 @@
             font-weight: normal;
             margin-bottom: 30px;
             color: #6c757d;
+            
         }
 
         form {
@@ -145,15 +146,13 @@
             width: 100%;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Distribute items evenly */
+            justify-content: flex-end;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
-            border-radius: 8px;
-            padding: 0 10px; /* Add padding for spacing */
-            flex-wrap: wrap; /* Allow navbar items to wrap */
+            border-radius:8px;
         }
 
         /* Navbar link styling */
@@ -161,53 +160,23 @@
             color: white;
             background-color: dodgerblue;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 18px;
             padding: 8px 16px;
             border-radius: 5px;
             transition: background-color 0.3s;
-            margin-right: 10px; /* Space between navbar links */
         }
 
         .navbar a:hover {
             background-color: white;
             color: black;
         }
-
-        #tab {
-            position: relative;
-            right: 20px;
+        #tab{
+            position:relative;
+            right:20px;
         }
-
-        #insta {
-            position: relative;
-            right: 10px;
-        }
-
-        /* Adjust for smaller screens */
-        @media (max-width: 768px) {
-            .navbar {
-                justify-content: center; /* Center navbar links on smaller screens */
-                flex-direction: column; /* Stack navbar items vertically */
-                padding: 10px 5px; /* Adjust padding for smaller devices */
-            }
-
-            .navbar a {
-                margin: 5px 0; /* Add vertical margin between items */
-                font-size: 14px; /* Adjust font size for smaller screens */
-                padding: 10px 15px; /* Adjust padding for smaller screens */
-            }
-        }
-
-        /* Adjustments for very small screens (e.g., mobile) */
-        @media (max-width: 400px) {
-            .navbar {
-                flex-direction: column; /* Ensure navbar items stack vertically */
-            }
-
-            .navbar a {
-                font-size: 13px; /* Smaller font size for mobile */
-                padding: 8px 12px; /* Adjust padding */
-            }
+        #insta{
+            position:relative;
+            right:10px;
         }
     </style>
     <script>
@@ -264,9 +233,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="https://samhub.onrender.com/about" id="tab" class="btn">About us</a>
-        <a href="https://samhub.onrender.com/instagram" id="insta" class="btn">Instagram Downloader</a>
-        <a href="https://samhub.onrender.com/howtouse" id="htu" class="btn">How to use</a>
+        <a href="http://127.0.0.1:5000/about" id="tab" class="btn">About us</a>
+        <a href="http://127.0.0.1:5000/instagram" id="insta" class="btn">Instagram Downloader</a>
+        <a href="http://127.0.0.1:5000/howtouse" id="htu" class="btn">How to use</a>
     </nav>
 
     <div class="container">
