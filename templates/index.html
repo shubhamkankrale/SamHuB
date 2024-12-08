@@ -30,7 +30,7 @@
             padding: 40px;
             text-align: center;
             position: relative;
-            margin-top:50px;
+            margin-top: 50px;
         }
 
         .logo img {
@@ -50,7 +50,6 @@
             font-weight: normal;
             margin-bottom: 30px;
             color: #6c757d;
-            
         }
 
         form {
@@ -152,7 +151,7 @@
             top: 0;
             left: 0;
             z-index: 1000;
-            border-radius:8px;
+            border-radius: 8px;
         }
 
         /* Navbar link styling */
@@ -170,13 +169,35 @@
             background-color: white;
             color: black;
         }
-        #tab{
-            position:relative;
-            right:20px;
+
+        /* Adjust navbar for mobile devices */
+        @media (max-width: 455px) {
+            .navbar {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: auto;
+                padding: 10px 0;
+            }
+
+            .navbar a {
+                margin: 5px 0;
+                width: 90%;
+                text-align: center;
+            }
+            .container{
+                margin-top:100px;
+            }
         }
-        #insta{
-            position:relative;
-            right:10px;
+
+        #tab {
+            position: relative;
+            right: 20px;
+        }
+
+        #insta {
+            position: relative;
+            right: 10px;
         }
     </style>
     <script>
@@ -233,9 +254,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="http://127.0.0.1:5000/about" id="tab" class="btn">About us</a>
-        <a href="http://127.0.0.1:5000/instagram" id="insta" class="btn">Instagram Downloader</a>
-        <a href="http://127.0.0.1:5000/howtouse" id="htu" class="btn">How to use</a>
+        <a href="https://samhub.onrender.com/about" id="tab" class="btn">About us</a>
+        <a href="https://samhub.onrender.com/instagram" id="insta" class="btn">Instagram Downloader</a>
+        <a href="https://samhub.onrender.com/howtouse" id="htu" class="btn">How to use</a>
     </nav>
 
     <div class="container">
