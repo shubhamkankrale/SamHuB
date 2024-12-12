@@ -259,32 +259,8 @@
         <a href="https://samhub.onrender.com/howtouse" id="htu" class="btn">How to use</a>
     </nav>
 
-    <div class="container">
-        <div class="logo">
-            <img src="/static/images/SamLOGO1.png" alt="SamHub Logo">
-        </div>
-        <h1>YouTube Media Downloader</h1>
-        <h2>Download videos and audio from YouTube</h2>
-
-        <form action="/download" method="POST">
-            <input type="text" name="url" placeholder="Enter YouTube URL" required>
-            <select name="format" required>
-                <option value="bestvideo">Best Video</option>
-                <option value="worstvideo">Worst Video</option>
-                <option value="audioonly">Audio Only</option>
-            </select>
-            <button type="submit">Download</button>
-        </form>
-
-        <!-- Loading spinner -->
-        <div id="spinner"></div>
-
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="flash">{{ messages[0] }}</div>
-            {% endif %}
-        {% endwith %}
-
+    <h1>Site is Under Maintenance</h1>
+    <h1>Sorry For This...</h1>
         <footer>
             Developed by <a href="https://www.instagram.com/sam_kankrale/?next=%2F">Sam Kankrale</a>
         </footer>
