@@ -1,5 +1,5 @@
 ﻿Flask==3.0.3
-yt-dlp==2024.9.27
+yt-dlp==2024.12.6
 gunicorn
 gevent>=1.4
 waitress==3.0.0
