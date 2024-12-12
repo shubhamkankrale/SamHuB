@@ -16,15 +16,14 @@ def download_video():
         download_quality = request.form['format']  # 'best', 'worst', or 'audioonly'
 
         ydl_opts = {
-            'cookiefile': 'cookies.txt',  # Path to your exported cookies file
+            'cookiefile': 'cookies.txt',  # Pass cookies to authenticate requests
             'outtmpl': 'downloads/%(title)s.%(ext)s',
             'format': 'bestvideo+bestaudio/best',
             'merge_output_format': 'mp4',
             'postprocessors': [{'key': 'FFmpegMetadata'}],
-            'http_headers': {  # Set a realistic user-agent to reduce detection
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-            },
         }
+
+
 
         if download_quality == 'audioonly':
             ydl_opts['format'] = 'bestaudio/best'
@@ -63,15 +62,12 @@ def cleanup():
     except Exception as e:
         flash(f"Cleanup failed: {str(e)}")
     return redirect(url_for('index'))
-
 @app.route('/about')
 def aboutus():
     return render_template('about.html')
-
 @app.route('/instagram')
 def insta():
     return render_template('Instagram.html')
-
 @app.route('/howtouse')
 def howtouse():
     return render_template('howtouse.html')
