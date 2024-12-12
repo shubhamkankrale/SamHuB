@@ -16,38 +16,44 @@ def download_video():
         download_quality = request.form['format']  # 'best', 'worst', or 'audioonly'
 
         ydl_opts = {
-            'cookiefile': 'cookies.txt',  # Pass cookies to authenticate requests
             'outtmpl': 'downloads/%(title)s.%(ext)s',
-            'format': 'bestvideo+bestaudio/best',
             'merge_output_format': 'mp4',
-            'postprocessors': [{'key': 'FFmpegMetadata'}],
         }
-
-
 
         if download_quality == 'audioonly':
             ydl_opts['format'] = 'bestaudio/best'
-            ydl_opts['postprocessors'].append({
+            ydl_opts['postprocessors'] = [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
-            })
-        elif download_quality == 'best':
+            }]
+        elif download_quality == 'bestvideo':
             ydl_opts['format'] = 'bestvideo+bestaudio/best'
-            ydl_opts['merge_output_format'] = 'mp4'
-        elif download_quality == 'worst':
-            ydl_opts['format'] = 'worst'  # Downloads the worst quality available
+        elif download_quality == 'worstvideo':
+            ydl_opts['format'] = 'worstvideo/worstaudio/worst'
 
+        # Check available formats to handle errors gracefully
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info_dict = ydl.extract_info(video_url, download=False)  # Extract without downloading
+            formats = info_dict.get('formats', None)
+
+            # Validate if the requested format exists
+            if not formats:
+                raise Exception("No formats available for the given video.")
+
+            # Download the video
             info_dict = ydl.extract_info(video_url, download=True)
             file_name = ydl.prepare_filename(info_dict)
 
-        # Adjust the file name if audio-only
+        # Adjust file name if audio-only
         if download_quality == 'audioonly':
             file_name = file_name.replace('.webm', '.mp3')
 
         return send_file(file_name, as_attachment=True)
 
+    except yt_dlp.DownloadError as e:
+        flash(f"Error: {str(e)}. Please try another video or format.")
+        return redirect(url_for('index'))
     except Exception as e:
         flash(f"Error: {str(e)}")
         return redirect(url_for('index'))
@@ -62,12 +68,15 @@ def cleanup():
     except Exception as e:
         flash(f"Cleanup failed: {str(e)}")
     return redirect(url_for('index'))
+
 @app.route('/about')
 def aboutus():
     return render_template('about.html')
+
 @app.route('/instagram')
 def insta():
     return render_template('Instagram.html')
+
 @app.route('/howtouse')
 def howtouse():
     return render_template('howtouse.html')
